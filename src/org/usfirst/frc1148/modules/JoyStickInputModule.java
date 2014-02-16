@@ -21,6 +21,7 @@ public class JoyStickInputModule implements RobotModule {
     RobotDriver driver;
     AutoDriveModule autoDrive;
     Robot robot;
+    MotorTestModule motorTester;
 
     public JoyStickInputModule(Robot robot) {
         this.robot = robot;
@@ -31,6 +32,7 @@ public class JoyStickInputModule implements RobotModule {
         System.out.println("Initializing JoyStickInputModule...");
         this.autoDrive = (AutoDriveModule)robot.GetModuleByName("autodrive");
         this.driver = (RobotDriver)robot.GetModuleByName("robotDriver");
+        this.motorTester = (MotorTestModule)robot.GetModuleByName("testmotor");
         drive = new Joystick(1);
         secControl = new Joystick(2);
         thirdControl = new Joystick(3);
@@ -98,5 +100,8 @@ public class JoyStickInputModule implements RobotModule {
         } else {
             autoDrive.Disable();
         }
+        
+        //Test motor
+        motorTester.SetSpeed(secControl.getY());
     }
 }

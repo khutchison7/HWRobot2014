@@ -15,11 +15,11 @@ import edu.wpi.first.wpilibj.Watchdog;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
-//Robot modules
 import org.usfirst.frc1148.interfaces.RobotModule;
 import org.usfirst.frc1148.modules.AutoDriveModule;
 import org.usfirst.frc1148.modules.AutonomousModule;
 import org.usfirst.frc1148.modules.JoyStickInputModule;
+import org.usfirst.frc1148.modules.MotorTestModule;
 import org.usfirst.frc1148.modules.RobotDriver;
 
 public class Robot extends IterativeRobot {
@@ -43,6 +43,7 @@ public class Robot extends IterativeRobot {
         modules.put("autodrive", new AutoDriveModule(this));
         modules.put("joystick", new JoyStickInputModule(this));
         modules.put("autonomous", new AutonomousModule(this));
+        modules.put("testmotor", new MotorTestModule(this));
         
         System.out.println("Robot construction done...");
         
