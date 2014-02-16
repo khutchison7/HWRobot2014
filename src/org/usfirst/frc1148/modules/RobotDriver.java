@@ -2,6 +2,7 @@ package org.usfirst.frc1148.modules;
 
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.RobotDrive.MotorType;
 import edu.wpi.first.wpilibj.Talon;
 import org.usfirst.frc1148.Robot;
 import org.usfirst.frc1148.data.MoveData;
@@ -19,6 +20,7 @@ public class RobotDriver implements RobotModule {
     int angleOffset = 0;
     MoveData moveData;
     RobotDrive driver;
+    boolean enableMotors = true;
 
     public RobotDriver(Robot robot) {
         this.robot = robot;
@@ -39,7 +41,9 @@ public class RobotDriver implements RobotModule {
         robotGyro = new Gyro(1);
         backLeft = new Talon(1);
         backRight = new Talon(3);
-        driver = new RobotDrive(frontLeft, backLeft, frontRight, backRight);
+        driver = new RobotDrive(backLeft, frontLeft, backRight, frontRight);
+        driver.setInvertedMotor(MotorType.kRearLeft, true);
+        driver.setInvertedMotor(MotorType.kFrontLeft, true);
         System.out.println("Robot driver module initialized.");
     }
 
@@ -76,24 +80,28 @@ public class RobotDriver implements RobotModule {
     }
 
     public void processMovementVector() {
-        double speed = moveData.speed;
-        double moveAngle = moveData.angle;
+        if(enableMotors){
+            double speed = moveData.speed;
+            double moveAngle = moveData.angle;
 
-        if (relativeDrive) {
-            moveAngle -= robotGyro.getAngle() + angleOffset;
-        }
-        
-        //Replace with % operator
-        while (moveAngle < 0 || moveAngle > 360) {
-            if (moveAngle < 0) {
-                moveAngle += 360;
-            } else if (moveAngle > 360) {
-                moveAngle -= 360;
+            if (relativeDrive) {
+                moveAngle -= robotGyro.getAngle() + angleOffset;
             }
+
+            //Replace with % operator
+            while (moveAngle < 0 || moveAngle > 360) {
+                if (moveAngle < 0) {
+                    moveAngle += 360;
+                } else if (moveAngle > 360) {
+                    moveAngle -= 360;
+                }
+            }
+
+            double rotSpeed = moveData.rotationSpeed;
+            driver.mecanumDrive_Polar(speed, moveAngle, -rotSpeed);
+        }else{
+            driver.stopMotor();
         }
-        
-        double rotSpeed = moveData.rotationSpeed;
-        driver.mecanumDrive_Polar(speed, moveAngle, rotSpeed);
     }
 
     public void updateTick(int mode) {
@@ -119,5 +127,13 @@ public class RobotDriver implements RobotModule {
             }
         }
         return angle;
+    }
+
+    MoveData getDriveData() {
+        return moveData;
+    }
+
+    void SetMotorsEnabled(boolean doEnable) {
+        enableMotors = doEnable;
     }
 }

@@ -22,6 +22,7 @@ public class MotorTestModule implements RobotModule {
     
     public void initModule() {
         testMotor = new Talon(6);
+        System.out.println("Test motor initialized with channel "+testMotor.getChannel());
     }
 
     public void activateModule() {
@@ -38,7 +39,23 @@ public class MotorTestModule implements RobotModule {
         testMotor.set(speed);
     }
     
+    public void SetPort(int port){
+        if(testMotor.getChannel() == port) return;
+        testMotor.stopMotor();
+        testMotor.free();
+        testMotor = new Talon(port);
+        System.out.println("Test motor channel changed to "+port);
+    }
+    
     public void SetSpeed(double speed){
         this.speed = speed;
+    }
+    
+    public double GetSpeed(){
+        return speed;
+    }
+    
+    public int GetPort(){
+        return testMotor.getChannel();
     }
 }

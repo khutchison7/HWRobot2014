@@ -18,6 +18,7 @@ import java.util.Hashtable;
 import org.usfirst.frc1148.interfaces.RobotModule;
 import org.usfirst.frc1148.modules.AutoDriveModule;
 import org.usfirst.frc1148.modules.AutonomousModule;
+import org.usfirst.frc1148.modules.DashboardModule;
 import org.usfirst.frc1148.modules.JoyStickInputModule;
 import org.usfirst.frc1148.modules.MotorTestModule;
 import org.usfirst.frc1148.modules.RobotDriver;
@@ -44,6 +45,7 @@ public class Robot extends IterativeRobot {
         modules.put("joystick", new JoyStickInputModule(this));
         modules.put("autonomous", new AutonomousModule(this));
         modules.put("testmotor", new MotorTestModule(this));
+        //modules.put("dashboard", new DashboardModule(this));
         
         System.out.println("Robot construction done...");
         

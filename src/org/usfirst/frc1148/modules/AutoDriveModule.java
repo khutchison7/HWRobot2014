@@ -91,4 +91,8 @@ public class AutoDriveModule implements RobotModule
         double diff = newHdg - hdg;        // CCW = counter-clockwise ie. left
         return diff > 0 ? diff > 180 : diff >= -180;
     }
+
+    boolean AutoOrientEnabled() {
+        return autoOrient;
+    }
 }

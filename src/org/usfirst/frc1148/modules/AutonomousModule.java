@@ -32,6 +32,10 @@ public class AutonomousModule implements RobotModule {
     public void deactivateModule() {
     }
 
+    void SetAllowed(boolean aBoolean) {
+        autonomousEnabled = aBoolean;
+    }
+        
     //For autonomous we just do timed states
     //Each state incriments to the next state (timed)
     //This way we can be sure of the timing of autonomous
@@ -53,5 +57,9 @@ public class AutonomousModule implements RobotModule {
                     break;
             }
         }
+    }
+
+    double GetState() {
+        return state;
     }
 }
