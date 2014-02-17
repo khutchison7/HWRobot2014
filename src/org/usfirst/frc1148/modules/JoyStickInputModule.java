@@ -102,6 +102,6 @@ public class JoyStickInputModule implements RobotModule {
         }
         
         //Test motor
-        motorTester.SetSpeed(secControl.getY());
+        motorTester.SetSpeed(secControl.getTrigger() ? secControl.getY() : 0);
     }
 }

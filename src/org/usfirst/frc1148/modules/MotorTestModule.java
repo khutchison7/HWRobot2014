@@ -21,16 +21,16 @@ public class MotorTestModule implements RobotModule {
     }
     
     public void initModule() {
-        testMotor = new Talon(6);
+        testMotor = new Talon(5); //connected to 5
         System.out.println("Test motor initialized with channel "+testMotor.getChannel());
     }
 
     public void activateModule() {
-        testMotor.setSafetyEnabled(false);
+        //testMotor.setSafetyEnabled(false);
     }
 
     public void deactivateModule() {
-        testMotor.setSafetyEnabled(true);
+        //testMotor.setSafetyEnabled(true);
     }
 
     public void updateTick(int mode) {

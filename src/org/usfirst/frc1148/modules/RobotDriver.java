@@ -36,14 +36,14 @@ public class RobotDriver implements RobotModule {
 
     public void initModule() {
         System.out.println("Initialzing robot driver module!");
-        frontLeft = new Talon(2);
-        frontRight = new Talon(4);
+        frontLeft = new Talon(6); //connected to 6
+        frontRight = new Talon(7); //connected to 7
         robotGyro = new Gyro(1);
-        backLeft = new Talon(1);
-        backRight = new Talon(3);
-        driver = new RobotDrive(backLeft, frontLeft, backRight, frontRight);
-        driver.setInvertedMotor(MotorType.kRearLeft, true);
-        driver.setInvertedMotor(MotorType.kFrontLeft, true);
+        backRight = new Talon(1);
+        backLeft = new Talon(3);
+        driver = new RobotDrive(frontLeft, backLeft, frontRight, backRight);
+        driver.setInvertedMotor(MotorType.kFrontRight, true);
+        driver.setInvertedMotor(MotorType.kRearRight, true);
         System.out.println("Robot driver module initialized.");
     }
 
@@ -98,7 +98,7 @@ public class RobotDriver implements RobotModule {
             }
 
             double rotSpeed = moveData.rotationSpeed;
-            driver.mecanumDrive_Polar(speed, moveAngle, -rotSpeed);
+            driver.mecanumDrive_Polar(speed, moveAngle, rotSpeed);
         }else{
             driver.stopMotor();
         }
