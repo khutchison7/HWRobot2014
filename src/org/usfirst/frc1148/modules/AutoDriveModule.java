@@ -27,7 +27,7 @@ public class AutoDriveModule implements RobotModule
         this.robot = robot;
     }
 
-    public void initModule() 
+    public void initModule()
     {
         this.driver = (RobotDriver)this.robot.GetModuleByName("robotDriver");
     }

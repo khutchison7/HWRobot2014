@@ -67,6 +67,7 @@ public class Robot extends IterativeRobot {
      * You should instead create a robot module and register it.
      * ====================================
      */
+
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -139,7 +140,6 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Watchdog.getInstance().feed();
-
         Enumeration e = modules.elements();
         RobotModule value;
         while (e.hasMoreElements()) {

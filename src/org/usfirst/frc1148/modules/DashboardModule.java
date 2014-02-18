@@ -12,18 +12,18 @@ import org.usfirst.frc1148.interfaces.RobotModule;
  * Currently disabled and not working properly
  * @author HW Robotics
  */
-public class DashboardModule implements RobotModule{
+public class DashboardModule implements RobotModule {
     AutoDriveModule auto;
     AutonomousModule autonomous;
     JoyStickInputModule joy;
     MotorTestModule test;
     RobotDriver driver;
     Robot robot;
-    
-    public DashboardModule(Robot robot){
+
+    public DashboardModule(Robot robot) {
         this.robot = robot;
     }
-    
+
     public void initModule() {
         driver = (RobotDriver)robot.GetModuleByName("robotDriver");
         autonomous = (AutonomousModule)robot.GetModuleByName("autonomous");
@@ -41,29 +41,29 @@ public class DashboardModule implements RobotModule{
     public void updateTick(int mode) {
         //Update the test motor speed
         SmartDashboard.putNumber("testMotorSpeed", test.GetSpeed());
-        if(SmartDashboard.getBoolean("enableTestMotorControl", false)){
+        if(SmartDashboard.getBoolean("enableTestMotorControl", false)) {
             test.SetSpeed(SmartDashboard.getNumber("testMotorSpeed", 0));
         }
-        
+
         //Update enable driving
         SmartDashboard.putNumber("driveAngle", driver.getDriveData().angle);
         SmartDashboard.putNumber("driveSpeed", driver.getDriveData().speed);
         SmartDashboard.putNumber("rotateSpeed", driver.getDriveData().rotationSpeed);
         driver.SetMotorsEnabled(SmartDashboard.getBoolean("disableDrive"));
-        
+
         //Check reset gyro
         if(SmartDashboard.getBoolean("resetGyro", false))
         {
             SmartDashboard.putBoolean("resetGyro", false);
             driver.resetGyro();
         }
-        
+
         //Set autonomous modes
         autonomous.SetAllowed(SmartDashboard.getBoolean("autonomousEnabled", true));
         SmartDashboard.putNumber("autonomousState", autonomous.GetState());
-        
+
         //Autodrive
         SmartDashboard.putBoolean("autoOrientEnabled", auto.AutoOrientEnabled());
     }
-    
+
 }

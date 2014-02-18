@@ -18,9 +18,9 @@ public class CompressorModule implements RobotModule {
     boolean relayState = true;
 
     public CompressorModule(Robot aThis) {
-      this.robot = aThis;
+        this.robot = aThis;
     }
-    
+
     public void initModule() {
         System.out.println("Compressor module initialized.");
         //Input 3 for the switch, 9 for the spike relay
@@ -33,19 +33,19 @@ public class CompressorModule implements RobotModule {
     }
 
     public void deactivateModule() {
-      System.out.println("Compressor shutdown.");
-      comp.stop();
+        System.out.println("Compressor shutdown.");
+        comp.stop();
     }
 
     public void updateTick(int mode) {
-      //True if pressurized
-      boolean currState = !comp.getPressureSwitchValue();
-      if(currState != relayState){
-        relayState = currState;
-        if(currState)
-          System.out.println("Compressor turned on.");
-        else
-          System.out.println("Compressor turned off.");
-      }
+        //True if pressurized
+        boolean currState = !comp.getPressureSwitchValue();
+        if(currState != relayState) {
+            relayState = currState;
+            if(currState)
+                System.out.println("Compressor turned on.");
+            else
+                System.out.println("Compressor turned off.");
+        }
     }
 }

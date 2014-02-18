@@ -38,3 +38,6 @@ Session.vim
 ### NotepadPP ###
 # Notepad++ backups #
 *.bak
+
+#Astyle
+*.orig

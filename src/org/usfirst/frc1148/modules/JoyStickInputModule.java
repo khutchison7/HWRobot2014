@@ -16,7 +16,7 @@ public class JoyStickInputModule implements RobotModule {
     double rotSpeed;
     boolean isResetButtonPressed = false;
     boolean isRelativeTogglePressed = false;
-    
+
     MoveData data;
     RobotDriver driver;
     AutoDriveModule autoDrive;
@@ -39,13 +39,13 @@ public class JoyStickInputModule implements RobotModule {
         System.out.println("JoystickInputModule initialized...");
     }
 
-    public void activateModule() 
+    public void activateModule()
     {
         //SetMoveData on the driver to establish our dominance
         driver.setMoveData(data);
     }
 
-    public void deactivateModule() 
+    public void deactivateModule()
     {
     }
 
@@ -53,7 +53,7 @@ public class JoyStickInputModule implements RobotModule {
         if (mode != 2) { //Manual mode only
             return;
         }
-        rotSpeed = drive.getZ()/1.5; 
+        rotSpeed = drive.getZ()/1.5;
         if (drive.getRawButton(2)) {
             rotSpeed = 0;
         }
@@ -100,7 +100,7 @@ public class JoyStickInputModule implements RobotModule {
         } else {
             autoDrive.Disable();
         }
-        
+
         //Test motor
         motorTester.SetSpeed(secControl.getTrigger() ? secControl.getY() : 0);
     }

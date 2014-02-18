@@ -80,7 +80,7 @@ public class RobotDriver implements RobotModule {
     }
 
     public void processMovementVector() {
-        if(enableMotors){
+        if(enableMotors) {
             double speed = moveData.speed;
             double moveAngle = moveData.angle;
 
@@ -99,7 +99,7 @@ public class RobotDriver implements RobotModule {
 
             double rotSpeed = moveData.rotationSpeed;
             driver.mecanumDrive_Polar(speed, moveAngle, rotSpeed);
-        }else{
+        } else {
             driver.stopMotor();
         }
     }
