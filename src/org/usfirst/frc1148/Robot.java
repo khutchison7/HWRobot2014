@@ -16,12 +16,7 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 
 import org.usfirst.frc1148.interfaces.RobotModule;
-import org.usfirst.frc1148.modules.AutoDriveModule;
-import org.usfirst.frc1148.modules.AutonomousModule;
-import org.usfirst.frc1148.modules.DashboardModule;
-import org.usfirst.frc1148.modules.JoyStickInputModule;
-import org.usfirst.frc1148.modules.MotorTestModule;
-import org.usfirst.frc1148.modules.RobotDriver;
+import org.usfirst.frc1148.modules.*;
 
 public class Robot extends IterativeRobot {
     
@@ -46,6 +41,8 @@ public class Robot extends IterativeRobot {
         modules.put("autonomous", new AutonomousModule(this));
         modules.put("testmotor", new MotorTestModule(this));
         //modules.put("dashboard", new DashboardModule(this));
+        modules.put("compressor", new CompressorModule(this));
+        modules.put("catapult", new CatapultModule(this));
         
         System.out.println("Robot construction done...");
         
