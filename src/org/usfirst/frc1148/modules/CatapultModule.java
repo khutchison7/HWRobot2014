@@ -64,7 +64,7 @@ public class CatapultModule implements RobotModule {
             //Unloading, send the signal to the solenoid
             if(!sol.get())
                 state = 0;
-            sol.set(false):
+            sol.set(false);
             break;
         case 3:
             //Loaded, do nothing

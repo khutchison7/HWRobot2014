@@ -4,7 +4,9 @@
  */
 package org.usfirst.frc1148.modules;
 
+import org.usfirst.frc1148.Robot;
 import edu.wpi.first.wpilibj.Compressor;
+import org.usfirst.frc1148.interfaces.RobotModule;
 
 /**
  *
