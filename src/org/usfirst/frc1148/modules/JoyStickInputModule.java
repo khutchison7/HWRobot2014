@@ -16,13 +16,19 @@ public class JoyStickInputModule implements RobotModule {
     double rotSpeed;
     boolean isResetButtonPressed = false;
     boolean isRelativeTogglePressed = false;
+    boolean isLoadButtonPressed = false;
+    boolean isLaunchButtonPressed = false;
 
     MoveData data;
     RobotDriver driver;
     AutoDriveModule autoDrive;
     Robot robot;
     MotorTestModule motorTester;
+    
+    CatapultModule Catapult;
+    CompressorModule Compressor;
 
+    
     public JoyStickInputModule(Robot robot) {
         this.robot = robot;
         data = new MoveData();
@@ -33,6 +39,10 @@ public class JoyStickInputModule implements RobotModule {
         this.autoDrive = (AutoDriveModule)robot.GetModuleByName("autodrive");
         this.driver = (RobotDriver)robot.GetModuleByName("robotDriver");
         this.motorTester = (MotorTestModule)robot.GetModuleByName("testmotor");
+        
+        this.Catapult = (CatapultModule)robot.GetModuleByName("catapult");
+        this.Compressor = (CompressorModule)robot.GetModuleByName("compressor");
+        
         drive = new Joystick(1);
         secControl = new Joystick(2);
         thirdControl = new Joystick(3);
@@ -71,7 +81,7 @@ public class JoyStickInputModule implements RobotModule {
         if (rotSpeed < .01 && rotSpeed > -.01) {
             rotSpeed = 0;
         }
-        if (drive.getRawButton(8) && !isResetButtonPressed) {
+        if (drive.getRawButton(8) && !isResetButtonPressed) { //resets gyro
             driver.resetGyro();
             isResetButtonPressed = true;
             System.out.println("Gyro reset!");
@@ -79,13 +89,35 @@ public class JoyStickInputModule implements RobotModule {
             isResetButtonPressed = false;
         }
 
-        if (drive.getRawButton(7) && !isRelativeTogglePressed) {
+        if (drive.getRawButton(7) && !isRelativeTogglePressed) { //toggle relative
             driver.ToggleRelative();
             isRelativeTogglePressed = true;
             System.out.println("toggled relative!");
         } else if (!drive.getRawButton(7)) {
             isRelativeTogglePressed = false;
         }
+        
+        if(drive.getRawButton(11) && !isLoadButtonPressed) //load
+        {
+            Catapult.Load();
+            //Catapult.updateTick(1);
+            //wait here
+            //Catapult.updateTick(3);
+            System.out.println("ball loaded");
+        }
+        else if (!drive.getRawButton(11)) {
+            isLoadButtonPressed = false;
+        }
+                
+        if(drive.getRawButton(9) && !isLaunchButtonPressed) //launch
+        {
+            Catapult.Launch();
+            System.out.println("launched");
+        }
+        else if (!drive.getRawButton(9)) {
+            isLaunchButtonPressed = false;
+        }
+        
 
         //Here add your other features
         data.speed = Math.max(Math.abs(drive.getX()), Math.abs(drive.getY()));
@@ -93,15 +125,13 @@ public class JoyStickInputModule implements RobotModule {
         data.rotationSpeed = rotSpeed;
 
         //AUTO ORIENT
-        if (drive.getRawButton(11)) {
-            autoDrive.OrientTo(45);
-        } else if (drive.getRawButton(12)) {
-            autoDrive.OrientTo(360 - 45);
-        } else {
-            autoDrive.Disable();
-        }
+        //if (drive.getRawButton(12)) {
+        //    autoDrive.OrientTo(45);
+        //} else {
+        autoDrive.Disable();
+        //}
 
         //Test motor
-        motorTester.SetSpeed(secControl.getTrigger() ? secControl.getY() : 0);
+        //motorTester.SetSpeed(secControl.getTrigger() ? secControl.getY() : 0);
     }
 }

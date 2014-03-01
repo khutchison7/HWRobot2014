@@ -45,9 +45,15 @@ public class CompressorModule implements RobotModule {
         if(currState != relayState) {
             relayState = currState;
             if(currState)
+            {
                 System.out.println("Compressor turned on.");
+                activateModule();
+            }
             else
+            {
                 System.out.println("Compressor turned off.");
+                deactivateModule();
+            }
         }
     }
 }

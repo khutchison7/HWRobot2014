@@ -57,6 +57,19 @@ public class DashboardModule implements RobotModule {
             SmartDashboard.putBoolean("resetGyro", false);
             driver.resetGyro();
         }
+        
+        //Show relative / standard
+        //SmartDashboard.putBoolean("Relative Drive is :", driver.relativeDrive);
+        //if(SmartDashboard.getBoolean("Relative Drive is :", driver.relativeDrive))
+        if(driver.relativeDrive==true)
+        {
+            SmartDashboard.putString("Relative Drive is : ","on");
+        }
+        else
+        {
+            SmartDashboard.putString("Relative Drive is : ","off");
+        }
+        
 
         //Set autonomous modes
         autonomous.SetAllowed(SmartDashboard.getBoolean("autonomousEnabled", true));

@@ -3,6 +3,7 @@ package org.usfirst.frc1148.modules;
 import edu.wpi.first.wpilibj.Solenoid;
 import org.usfirst.frc1148.Robot;
 import org.usfirst.frc1148.interfaces.RobotModule;
+import edu.wpi.first.wpilibj.Timer;
 
 public class CatapultModule implements RobotModule {
     Robot robot;
@@ -28,6 +29,7 @@ public class CatapultModule implements RobotModule {
 
     public void initModule() {
         System.out.println("Initialzing catapult module!");
+        sol = new Solenoid(1);
         System.out.println("Catapult module initialized.");
     }
 
@@ -37,6 +39,7 @@ public class CatapultModule implements RobotModule {
 
     public void deactivateModule() {
         System.out.println("Catapult module safely deactivating!");
+        
         System.out.println("Catapult module deactivated!");
     }
 
